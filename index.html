@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kiss Day 💋</title>
+<title>Happy Kiss Day 💋</title>
 
 <style>
 body{
@@ -11,91 +11,63 @@ margin:0;
 overflow:hidden;
 font-family:Segoe UI;
 text-align:center;
-background:radial-gradient(circle at bottom,#1a0026,#330033,#ff66b2);
+background:radial-gradient(circle at center,#ff0066,#660033,#1a001a);
 color:white;
 }
 
-/* Countdown */
-#countdown{
-position:absolute;
-top:20px;
-width:100%;
-font-size:22px;
-color:#ffe6f2;
-letter-spacing:1px;
+/* Title Glow */
+h1{
+margin-top:40px;
+font-size:40px;
+animation:glow 2s infinite alternate;
 }
 
-/* Couple Image */
+@keyframes glow{
+from{text-shadow:0 0 10px #ff99cc;}
+to{text-shadow:0 0 25px #ff1a75;}
+}
+
+/* Image Pulse */
 .couple{
 position:absolute;
-bottom:120px;
+top:50%;
 left:50%;
-transform:translateX(-50%);
+transform:translate(-50%,-50%);
 width:320px;
-cursor:pointer;
-transition:0.4s;
-}
-
-.pulse{
-animation:pulse 2s infinite;
+animation:pulse 2.5s infinite;
 }
 
 @keyframes pulse{
-0%{transform:translateX(-50%) scale(1);}
-50%{transform:translateX(-50%) scale(1.05);}
-100%{transform:translateX(-50%) scale(1);}
+0%{transform:translate(-50%,-50%) scale(1);}
+50%{transform:translate(-50%,-50%) scale(1.07);}
+100%{transform:translate(-50%,-50%) scale(1);}
 }
 
 /* Floating Hearts */
 .heart{
 position:absolute;
-font-size:22px;
-animation:float 4s linear forwards;
+font-size:24px;
+animation:float 6s linear infinite;
 }
 
 @keyframes float{
-0%{opacity:1; transform:translateY(0);}
-100%{opacity:0; transform:translateY(-350px);}
+0%{transform:translateY(100vh); opacity:1;}
+100%{transform:translateY(-10vh); opacity:0;}
 }
 
-/* Sparkle */
+/* Sparkles */
 .sparkle{
 position:absolute;
-width:4px;
-height:4px;
+width:3px;
+height:3px;
 background:white;
 border-radius:50%;
-animation:glow 1.5s infinite alternate;
+animation:twinkle 2s infinite alternate;
 }
 
-@keyframes glow{
+@keyframes twinkle{
 from{opacity:0.3;}
 to{opacity:1;}
-}
-
-/* Final Message */
-#final{
-position:absolute;
-top:45%;
-width:100%;
-font-size:34px;
-opacity:0;
-transition:2s;
-color:#ffccff;
-}
-
-.show{
-opacity:1;
-}
-
-/* Screen flash */
-.flash{
-animation:flash 1s;
-}
-
-@keyframes flash{
-0%{background:#ff1a75;}
-100%{background:radial-gradient(circle at bottom,#1a0026,#330033,#ff66b2);}
 }
 </style>
 </head>
@@ -104,51 +76,30 @@ animation:flash 1s;
 
 <h1>Happy Kiss Day My Love 💋</h1>
 
-<div id="countdown"></div>
-
-<img src="kiss.png" class="couple pulse" id="couple">
-
-<div id="final">See You On Valentine’s Day ❤️</div>
+<img src="kiss.png" class="couple">
 
 <script>
 
-/* ---------------- Countdown ---------------- */
-var countDate = new Date("Feb 14, 2026 00:00:00").getTime();
-
-var x = setInterval(function(){
-var now = new Date().getTime();
-var distance = countDate - now;
-
-if(distance <= 0){
-clearInterval(x);
-document.body.classList.add("flash");
-document.getElementById("final").classList.add("show");
-
-setTimeout(function(){
-window.location.href="valentine.html";
-},4000);
-}
-
-var days = Math.floor(distance/(1000*60*60*24));
-var hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-var minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-var seconds = Math.floor((distance%(1000*60))/1000);
-
-document.getElementById("countdown").innerHTML =
-"⏳ Valentine’s Day in: " + days+"d "+hours+"h "
-+minutes+"m "+seconds+"s ";
-
-},1000);
-
-
-/* ---------------- Floating Hearts ---------------- */
-document.getElementById("couple").addEventListener("click",function(){
-
-for(let i=0;i<20;i++){
+/* Floating Hearts */
+setInterval(function(){
 let heart=document.createElement("div");
 heart.className="heart";
 heart.innerHTML="💖";
 heart.style.left=Math.random()*100+"vw";
-heart.style.bottom="150px";
 document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),4000);
+setTimeout(()=>heart.remove(),6000);
+},500);
+
+/* Sparkles */
+for(let i=0;i<80;i++){
+let sparkle=document.createElement("div");
+sparkle.className="sparkle";
+sparkle.style.top=Math.random()*100+"vh";
+sparkle.style.left=Math.random()*100+"vw";
+document.body.appendChild(sparkle);
+}
+
+</script>
+
+</body>
+</html>
