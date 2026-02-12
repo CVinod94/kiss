@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine’s Day ❤️</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+font-family:Segoe UI;
+text-align:center;
+background:radial-gradient(circle at center,#ff0066,#660033,#1a001a);
+color:white;
+animation:fadeIn 3s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+h1{
+margin-top:20%;
+font-size:42px;
+letter-spacing:2px;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #ff99cc;}
+to{text-shadow:0 0 25px #ff1a75;}
+}
+
+h2{
+opacity:0;
+transition:3s;
+font-size:26px;
+}
+
+.show{
+opacity:1;
+}
+
+/* Floating Hearts */
+.heart{
+position:absolute;
+font-size:28px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh); opacity:1;}
+100%{transform:translateY(-10vh); opacity:0;}
+}
+
+/* Big Burst */
+.burst{
+position:absolute;
+font-size:60px;
+animation:explode 1.5s ease-out forwards;
+}
+
+@keyframes explode{
+0%{transform:scale(0); opacity:1;}
+100%{transform:scale(3); opacity:0;}
+}
+
+/* Sparkles */
+.sparkle{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.3;}
+to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<h1>Happy Valentine’s Day My Forever ❤️</h1>
+<h2 id="loveText">I Love You More Than Words Can Say 💘</h2>
+
+<audio autoplay loop>
+<source src="romantic.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+/* Reveal Love Message */
+setTimeout(()=>{
+document.getElementById("loveText").classList.add("show");
+},2000);
+
+
+/* Floating Hearts */
+setInterval(function(){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},500);
+
+
+/* Big Heart Burst On Load */
+setTimeout(function(){
+for(let i=0;i<20;i++){
+let burst=document.createElement("div");
+burst.className="burst";
+burst.innerHTML="💖";
+burst.style.left="50%";
+burst.style.top="40%";
+burst.style.transform="translate(-50%,-50%)";
+document.body.appendChild(burst);
+setTimeout(()=>burst.remove(),1500);
+}
+},800);
+
+
+/* Sparkles Background */
+for(let i=0;i<80;i++){
+let sparkle=document.createElement("div");
+sparkle.className="sparkle";
+sparkle.style.top=Math.random()*100+"vh";
+sparkle.style.left=Math.random()*100+"vw";
+document.body.appendChild(sparkle);
+}
+
+</script>
+
+</body>
+</html>
