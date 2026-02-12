@@ -18,7 +18,7 @@ color:white;
 /* Title Glow */
 h1{
 margin-top:40px;
-font-size:40px;
+font-size:38px;
 animation:glow 2s infinite alternate;
 }
 
@@ -27,13 +27,23 @@ from{text-shadow:0 0 10px #ff99cc;}
 to{text-shadow:0 0 25px #ff1a75;}
 }
 
-/* Image Pulse */
+/* Countdown */
+#countdown{
+position:absolute;
+top:10px;
+width:100%;
+font-size:20px;
+color:#ffe6f2;
+}
+
+/* Couple Image */
 .couple{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
 width:320px;
+cursor:pointer;
 animation:pulse 2.5s infinite;
 }
 
@@ -46,13 +56,13 @@ animation:pulse 2.5s infinite;
 /* Floating Hearts */
 .heart{
 position:absolute;
-font-size:24px;
-animation:float 6s linear infinite;
+font-size:26px;
+animation:float 5s linear forwards;
 }
 
 @keyframes float{
-0%{transform:translateY(100vh); opacity:1;}
-100%{transform:translateY(-10vh); opacity:0;}
+0%{opacity:1; transform:translateY(0);}
+100%{opacity:0; transform:translateY(-350px);}
 }
 
 /* Sparkles */
@@ -69,28 +79,86 @@ animation:twinkle 2s infinite alternate;
 from{opacity:0.3;}
 to{opacity:1;}
 }
+
+/* Flash */
+.flash{
+animation:flash 1s;
+}
+
+@keyframes flash{
+0%{background:#ff1a75;}
+100%{background:radial-gradient(circle at center,#ff0066,#660033,#1a001a);}
+}
 </style>
 </head>
 
 <body>
 
 <h1>Happy Kiss Day My Love 💋</h1>
+<div id="countdown"></div>
 
-<img src="kiss.png" class="couple">
+<img src="kiss.png" class="couple" id="couple">
+
+<!-- 🎵 Upload romantic.mp3 in same folder -->
+<audio autoplay loop>
+  <source src="romantic.mp3" type="audio/mp3">
+</audio>
 
 <script>
 
-/* Floating Hearts */
-setInterval(function(){
+/* ================= COUNTDOWN ================= */
+
+var countDate = new Date("Feb 14, 2026 00:00:00").getTime();
+
+var x = setInterval(function(){
+var now = new Date().getTime();
+var distance = countDate - now;
+
+if(distance <= 0){
+clearInterval(x);
+document.body.classList.add("flash");
+
+setTimeout(function(){
+window.location.href="valentine.html";
+},3000);
+}
+
+var days = Math.floor(distance/(1000*60*60*24));
+var hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+var minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+var seconds = Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML =
+"⏳ Valentine’s Day in: " + days+"d "
++hours+"h "+minutes+"m "+seconds+"s";
+
+},1000);
+
+
+/* ================= FLOATING HEARTS ================= */
+
+document.getElementById("couple").addEventListener("click",function(){
+
+/* Heart Burst */
+for(let i=0;i<25;i++){
 let heart=document.createElement("div");
 heart.className="heart";
 heart.innerHTML="💖";
-heart.style.left=Math.random()*100+"vw";
+heart.style.left=(50 + (Math.random()*20-10))+"%";
+heart.style.top="50%";
 document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),6000);
-},500);
+setTimeout(()=>heart.remove(),5000);
+}
 
-/* Sparkles */
+/* Screen Flash */
+document.body.classList.add("flash");
+setTimeout(()=>document.body.classList.remove("flash"),500);
+
+});
+
+
+/* ================= SPARKLES ================= */
+
 for(let i=0;i<80;i++){
 let sparkle=document.createElement("div");
 sparkle.className="sparkle";
